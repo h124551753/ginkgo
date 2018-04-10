@@ -1,0 +1,102 @@
+ext.mainApp = true
+apply from: 'https://raw.githubusercontent.com/luckybilly/CC/master/cc-settings.gradle'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def storePwd = properties.getProperty("keystore.storePassword")
+def keyPwd = properties.getProperty("keystore.keyPassword")
+def alias = properties.getProperty("keystore.keyAlias")
+
+android {
+    compileSdkVersion rootProject.compileVersion
+    defaultConfig {
+        if (project.ext.mainApp) {
+            applicationId "com.molmc.dispatch"
+        }
+
+        minSdkVersion rootProject.minVersion
+        targetSdkVersion rootProject.targetVersion
+        versionCode 1
+        versionName "0.1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+
+        release {
+            keyAlias alias
+            keyPassword keyPwd
+            storeFile file('../release.keystore')
+            storePassword storePwd
+        }
+    }
+
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+        }
+    }
+
+    compileOptions {
+        encoding "UTF-8"
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+
+    lintOptions {
+        abortOnError false
+    }
+
+    //打包后应用名称
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            def outputFileName
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                if (variant.buildType.name.equals('release')) {
+                    outputFileName = "ginkgo_v${defaultConfig.versionName}.apk"
+                } else if (variant.buildType.name.equals('debug')) {
+                    outputFileName = "ginkgo_debug_v${defaultConfig.versionName}.apk"
+                }
+            }
+        }
+    }
+
+}
+
+
+configurations.all { config ->
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion rootProject.supportVersion
+            }
+        }
+    }
+    if (config.name.contains('UnitTest')) {
+        config.resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == 'com.squareup.leakcanary' && details.requested.name == 'leakcanary-android') {
+                details.useTarget(group: details.requested.group, name: 'leakcanary-android-no-op', version: details.requested.version)
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':ginkgo_basic')
+
+    addComponent 'ginkgo_scanner'
+
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${rootProject.leakcanaryVersion}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.leakcanaryVersion}"
+}

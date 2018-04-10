@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.molmc.ginkgo.basic.views.AlphaTabsIndicator
+        android:id="@+id/ati_indicator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/basic_d54"
+        android:layout_alignParentBottom="true"
+        android:background="@color/basic_white1"
+        android:orientation="horizontal">
+
+        <com.molmc.ginkgo.basic.views.AlphaTabView
+            android:id="@+id/atv_operation"
+            style="@style/BottomTabBarStyle"
+            app:tabIconNormal="@drawable/ic_tab_home"
+            app:tabIconSelected="@drawable/ic_tab_home_selected"
+            app:tabText="@string/tab_home" />
+
+        <com.molmc.ginkgo.basic.views.AlphaTabView
+            android:id="@+id/atv_dispatch"
+            style="@style/BottomTabBarStyle"
+            app:tabIconNormal="@drawable/ic_tab_discovery"
+            app:tabIconSelected="@drawable/ic_tab_discovery_selected"
+            app:tabText="@string/tab_discover" />
+
+        <com.molmc.ginkgo.basic.views.AlphaTabView
+            android:id="@+id/atv_contacts"
+            style="@style/BottomTabBarStyle"
+            app:tabIconNormal="@drawable/ic_tab_message"
+            app:tabIconSelected="@drawable/ic_tab_message_selected"
+            app:tabText="@string/tab_message" />
+
+        <com.molmc.ginkgo.basic.views.AlphaTabView
+            android:id="@+id/atv_scene"
+            style="@style/BottomTabBarStyle"
+            app:tabIconNormal="@drawable/ic_tab_me"
+            app:tabIconSelected="@drawable/ic_tab_me_selected"
+            app:tabText="@string/tab_me" />
+    </com.molmc.ginkgo.basic.views.AlphaTabsIndicator>
+
+    <com.molmc.ginkgo.basic.views.NoScrollViewPager
+        android:id="@+id/vp_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/ati_indicator" />
+
+
+</RelativeLayout>

@@ -1,0 +1,70 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:9049618715691125118",
+      "lastPropertyId": "11:7874919658047620827",
+      "name": "UserEntity",
+      "properties": [
+        {
+          "id": "1:3821566260438665582",
+          "name": "id"
+        },
+        {
+          "id": "2:3759241627837923902",
+          "name": "userId"
+        },
+        {
+          "id": "3:8091022423504956857",
+          "name": "username"
+        },
+        {
+          "id": "4:8298231485593807786",
+          "name": "password"
+        },
+        {
+          "id": "5:2909614449386928063",
+          "name": "headerUrl"
+        },
+        {
+          "id": "6:7625768905161750338",
+          "name": "pocUsername"
+        },
+        {
+          "id": "7:660660571301172166",
+          "name": "pocPassword"
+        },
+        {
+          "id": "8:3153609321674723965",
+          "name": "lastLoginTime"
+        },
+        {
+          "id": "9:7800206067729334230",
+          "name": "loginIp"
+        },
+        {
+          "id": "10:1171667921949357003",
+          "name": "loginPort"
+        },
+        {
+          "id": "11:7874919658047620827",
+          "name": "isAutoLogin"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "1:9049618715691125118",
+  "lastIndexId": "0:0",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}
