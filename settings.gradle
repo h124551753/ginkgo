@@ -1,1 +1,1 @@
-include ':app', ':ginkgo_basic', ':ginkgo_scanner'
+include ':app', ':ginkgo_basic', ':ginkgo_scanner', ':ginkgo_user', ':ginkgo_stepcount', ':ginkgo_home', ':ginkgo_discovery', ':ginkgo_message'

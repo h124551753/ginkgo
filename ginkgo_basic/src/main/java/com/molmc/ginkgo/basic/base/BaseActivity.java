@@ -1,8 +1,11 @@
 package com.molmc.ginkgo.basic.base;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.ColorRes;
@@ -180,6 +183,19 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         return getResources().getColor(colorResId);
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestPermissionsSafely(String[] permissions, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, requestCode);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public boolean hasPermission(String permission) {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // 实现fragment拦截该事件，fragment不做处理再交给activity
@@ -203,7 +219,7 @@ public abstract class BaseActivity extends AppCompatActivity implements HandlerU
         }
         // 按返回键不退出程序,当且仅当当前activity为根activity才会生效
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(false);
+//            moveTaskToBack(false);
         }
         return super.onKeyDown(keyCode, event);
     }

@@ -95,7 +95,12 @@ dependencies {
 
     implementation project(':ginkgo_basic')
 
+    addComponent 'ginkgo_user'
     addComponent 'ginkgo_scanner'
+    addComponent 'ginkgo_home'
+    addComponent 'ginkgo_discovery'
+    addComponent 'ginkgo_message'
+    addComponent 'ginkgo_stepcount'
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${rootProject.leakcanaryVersion}"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${rootProject.leakcanaryVersion}"

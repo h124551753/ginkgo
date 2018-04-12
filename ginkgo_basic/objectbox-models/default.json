@@ -54,9 +54,29 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "2:8601179511132495210",
+      "lastPropertyId": "3:2648478557999194761",
+      "name": "StepDataEntity",
+      "properties": [
+        {
+          "id": "1:8900116133797724822",
+          "name": "id"
+        },
+        {
+          "id": "2:2712460024448704685",
+          "name": "today"
+        },
+        {
+          "id": "3:2648478557999194761",
+          "name": "step"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "1:9049618715691125118",
+  "lastEntityId": "2:8601179511132495210",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",

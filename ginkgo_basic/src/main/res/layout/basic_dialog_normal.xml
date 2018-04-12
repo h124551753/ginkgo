@@ -25,7 +25,7 @@
             android:textSize="@dimen/basic_s18"
             tools:text="对话框标题" />
 
-        <com.winsion.component.basic.view.MaxHeightScrollView
+        <com.molmc.ginkgo.basic.views.MaxHeightScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never">
@@ -39,7 +39,7 @@
                 android:textColor="@color/basic_gray9"
                 android:textSize="@dimen/basic_s18"
                 tools:text="对话框文字" />
-        </com.winsion.component.basic.view.MaxHeightScrollView>
+        </com.molmc.ginkgo.basic.views.MaxHeightScrollView>
 
         <include layout="@layout/basic_layout_dialog_btn" />
     </LinearLayout>

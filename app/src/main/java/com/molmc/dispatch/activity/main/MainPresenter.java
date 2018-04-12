@@ -5,11 +5,14 @@ import android.content.Context;
 
 import com.molmc.ginkgo.basic.biz.BasicBiz;
 import com.molmc.ginkgo.basic.data.NetDataSource;
+import com.molmc.ginkgo.basic.entity.MQMessage;
+import com.molmc.ginkgo.basic.mqtt.MQTTClient;
+import com.molmc.ginkgo.basic.utils.LogUtils;
 
 /**
  * Created by wyl on 2017/12/8
  */
-public class MainPresenter implements MainContract.Presenter {
+public class MainPresenter implements MainContract.Presenter, MQTTClient.Observer {
     private final MainContract.View mView;
     private final Context mContext;
 
@@ -22,30 +25,19 @@ public class MainPresenter implements MainContract.Presenter {
     public void start() {
         // 检查更新
         BasicBiz.checkVersionUpdate(mContext, this, false);
-
+        // 监听MQ消息
+        MQTTClient.addObserver(this);
     }
 
-//    @Override
-//    public void onMessageArrive(MQMessage msg) {
-//        switch (msg.getMessageType()) {
-//            case MQType.USER_LOGIN:
-//                String data = msg.getData();
-//                if (data.equals(CacheDataSource.getUserId())) {
-//                    // 用户在别的设备登录，强制下线
-//                    ToastUtils.showToast(mContext, R.string.toast_user_login_on_other_device);
-//                    CC.obtainBuilder("ComponentUser")
-//                            .setActionName("logout")
-//                            .build()
-//                            .call();
-//                }
-//                break;
-//            case MQType.TASK_STATE:
-//                TaskMessage taskEvent = JSON.parseObject(msg.getData(), TaskMessage.class);
-//                if (taskEvent.getMonitorteamid().equals(CacheDataSource.getTeamId())) {
-//                }
-//                break;
-//        }
-//    }
+
+
+    @Override
+    public void onMessageArrive(MQMessage msg) {
+        LogUtils.i(msg.getData());
+        switch (msg.getMessageType()) {
+
+        }
+    }
 
     /**
      * 发送通知
@@ -96,6 +88,6 @@ public class MainPresenter implements MainContract.Presenter {
     public void exit() {
         NetDataSource.unSubscribe(this);
         NetDataSource.unRegister(this);
-//        MQTTClient.removeObserver(this);
+        MQTTClient.removeObserver(this);
     }
 }

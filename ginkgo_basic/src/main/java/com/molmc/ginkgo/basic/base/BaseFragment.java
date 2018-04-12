@@ -1,8 +1,11 @@
 package com.molmc.ginkgo.basic.base;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.annotation.ColorRes;
@@ -63,6 +66,19 @@ public abstract class BaseFragment extends Fragment implements HandlerUtils.OnRe
      * 设置Fragment的内容View
      */
     protected abstract View setContentView();
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public void requestPermissionsSafely(String[] permissions, int requestCode) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(permissions, requestCode);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.M)
+    public boolean hasPermission(String permission) {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M ||
+                getActivity().checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+    }
 
     /**
      * 初始化

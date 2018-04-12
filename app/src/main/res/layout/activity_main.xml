@@ -42,11 +42,18 @@
             app:tabText="@string/tab_me" />
     </com.molmc.ginkgo.basic.views.AlphaTabsIndicator>
 
+    <include
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/ati_indicator"
+        layout="@layout/basic_divider_gray"/>
+
     <com.molmc.ginkgo.basic.views.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/ati_indicator" />
+        android:layout_above="@id/divider" />
 
 
 </RelativeLayout>

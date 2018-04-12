@@ -1,10 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="BasicAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/basic_black1</item>
-        <item name="colorPrimaryDark">@color/basic_black3</item>
+        <item name="colorPrimary">@color/basic_blue3</item>
+        <item name="colorPrimaryDark">@color/basic_blue3</item>
+        <item name="colorAccent">@color/basic_blue3</item>
+        <item name="colorControlNormal">@color/basic_blue3</item>
         <item name="android:windowAnimationStyle">@style/BasicActivityAnimation</item>
-        <item name="android:windowBackground">@color/basic_white2</item>
+        <item name="android:windowBackground">@color/basic_white1</item>
         <!--<item name="android:navigationBarColor" tools:ignore="NewApi">@android:color/transparent</item>-->
     </style>
 

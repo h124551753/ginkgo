@@ -8,9 +8,9 @@
         android:id="@+id/title_view_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/basic_d48"
-        android:background="@color/basic_black3"
+        android:background="@color/basic_blue3"
         android:gravity="center"
-        android:textColor="@color/basic_blue1"
+        android:textColor="@color/basic_white1"
         android:textSize="@dimen/basic_s20"
         tools:text="@string/app_name" />
 
@@ -32,7 +32,7 @@
         android:paddingEnd="@dimen/basic_d10"
         android:paddingStart="@dimen/basic_d10"
         android:text="@string/btn_complete"
-        android:textColor="@color/basic_blue1"
+        android:textColor="@color/basic_white1"
         android:textSize="@dimen/basic_s18"
         tools:ignore="RelativeOverlap" />
 </RelativeLayout>

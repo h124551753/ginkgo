@@ -24,7 +24,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     public void handlerMessage(Message msg) {
         super.handlerMessage(msg);
-        boolean hasComponentUser = CC.hasComponent("ComponentUser");
+        boolean hasComponentUser = CC.hasComponent("ComponentUser1");
         if (hasComponentUser) {
             CC.obtainBuilder("ComponentUser")
                     .setContext(this)

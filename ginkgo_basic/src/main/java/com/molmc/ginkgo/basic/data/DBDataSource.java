@@ -4,6 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.molmc.ginkgo.basic.biz.BasicBiz;
+import com.molmc.ginkgo.basic.entity.StepDataEntity;
+import com.molmc.ginkgo.basic.entity.StepDataEntity_;
 import com.molmc.ginkgo.basic.entity.UserEntity;
 import com.molmc.ginkgo.basic.entity.UserEntity_;
 
@@ -19,9 +21,11 @@ import io.objectbox.Box;
 public class DBDataSource {
     private static volatile DBDataSource mInstance;
     private final Box<UserEntity> mUserEntityBox;
+    private final Box<StepDataEntity> mStepEntityBox;
 
     private DBDataSource(Context context) {
         mUserEntityBox = BasicBiz.getBoxStore(context).boxFor(UserEntity.class);
+        mStepEntityBox = BasicBiz.getBoxStore(context).boxFor(StepDataEntity.class);
     }
 
     public static DBDataSource getInstance(Context context) {
@@ -98,5 +102,34 @@ public class DBDataSource {
             mUserEntityBox.put(lastLoginUser);
         }
     }
+
+
+
+
+    /**
+     * 获取所有登录过的用户，按照登录时间降序排序
+     *
+     * @return 用户集合
+     */
+    public List<StepDataEntity> getStepDataToday() {
+        return mStepEntityBox
+                .query()
+                .orderDesc(StepDataEntity_.today)
+                .build()
+                .find();
+    }
+
+
+    public void deleteStepData(StepDataEntity stepDataEntity) {
+        mStepEntityBox.remove(stepDataEntity);
+    }
+
+    /**
+     * 存储用户信息到数据库
+     */
+    public void saveStepDataEntity(StepDataEntity stepDataEntity) {
+        mStepEntityBox.put(stepDataEntity);
+    }
+
 
 }

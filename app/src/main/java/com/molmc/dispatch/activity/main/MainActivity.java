@@ -8,14 +8,19 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.billy.cc.core.component.CC;
+import com.google.gson.Gson;
 import com.molmc.dispatch.R;
 import com.molmc.ginkgo.basic.PlaceHolderFragment;
 import com.molmc.ginkgo.basic.base.BaseActivity;
-import com.molmc.ginkgo.basic.data.CacheDataSource;
+import com.molmc.ginkgo.basic.data.NetDataSource;
+import com.molmc.ginkgo.basic.entity.UserEntity;
+import com.molmc.ginkgo.basic.listener.ResponseListener;
+import com.molmc.ginkgo.basic.utils.LogUtils;
 import com.molmc.ginkgo.basic.views.AlphaTabView;
 import com.molmc.ginkgo.basic.views.AlphaTabsIndicator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by 10295 on 2017/12/6 0006
@@ -30,6 +35,8 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     private AlphaTabView atvRemind;
     private AlphaTabsIndicator atiIndicator;
     private ImageView ivHead;
+    // 标识双击"返回"按钮退出程序间隔时间
+    private long mLastBackTime = 0;
 
     private final ArrayList<Fragment> mFragments = new ArrayList<>();
     private MainContract.Presenter mPresenter;
@@ -41,29 +48,53 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
 
     @Override
     protected void start() {
-        if (CC.hasComponent("ComponentScanner")) {
-            // 没有登录也没有用户组件
+//        if (!CC.hasComponent("ComponentUser")) {
+//            // 没有登录也没有用户组件
 //            showFailed("没有登录组件");
-            CC.obtainBuilder("ComponentScanner")
-                    .setActionName("toCaptureActivity")
-                    .build()
-                    .call();
-        } else if (!CacheDataSource.getLoginState()) {
-            // 没有登录但有登录组件，先进行登录
-            // 跳转用户组件-登录界面
-            showToast("请先登录");
-            CC.obtainBuilder("ComponentUser")
-                    .setActionName("toLoginActivityClearTask")
-                    .build()
-                    .call();
-        } else {
+////            CC.obtainBuilder("ComponentScanner")
+////                    .setActionName("toCaptureActivity")
+////                    .build()
+////                    .call();
+//        } else if (!CacheDataSource.getLoginState()) {
+//            // 没有登录但有登录组件，先进行登录
+//            // 跳转用户组件-登录界面
+//            showToast("请先登录");
+////            CC.obtainBuilder("ComponentUser")
+////                    .setActionName("toLoginActivityClearTask")
+////                    .build()
+////                    .call();
+//        } else {
             initView();
             initPresenter();
-//            initData();
-//            initAdapter();
-//            initListener();
-//            loadUserHead();
-        }
+            initData();
+            initAdapter();
+            initListener();
+            loadUserHead();
+//        }
+//        httpTest();
+    }
+
+    public void httpTest(){
+        HashMap<String, String> payload = new HashMap<>();
+        payload.put("phone", "18127004662");
+        payload.put("password", "123asd");
+        NetDataSource.put(this, "v1/developer?act=login", payload, new ResponseListener<UserEntity>() {
+            @Override
+            public UserEntity convert(String jsonStr) {
+                LogUtils.i(jsonStr);
+                return new Gson().fromJson(jsonStr, UserEntity.class);
+            }
+
+            @Override
+            public void onSuccess(UserEntity result) {
+                showSuccess("测试成功");
+            }
+
+            @Override
+            public void onFailed(int errorCode, String errorInfo) {
+                showFailed("测试失败");
+            }
+        });
     }
 
     @Override
@@ -86,10 +117,10 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
     }
 
     private void initData() {
-        mFragments.add(getFragment("ComponentTask", "getOperationRootFragment"));
-        mFragments.add(getFragment("ComponentAAD", "getAADRootFragment"));
-        mFragments.add(getFragment("ComponentContact", "getContactRootFragment"));
-        mFragments.add(getFragment("ComponentScene", "getSceneRootFragment"));
+        mFragments.add(getFragment("ComponentHome", "getHomeRootFragment"));
+        mFragments.add(getFragment("ComponentDiscovery", "getDiscoveryRootFragment"));
+        mFragments.add(getFragment("ComponentMessage", "getMessageRootFragment"));
+        mFragments.add(getFragment("ComponentApp", "getMineFragment"));
     }
 
     /**
@@ -149,7 +180,6 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
         } else {
             alpha = 0;
         }
-        ivHead.setAlpha(alpha);
     }
 
     @Override
@@ -173,6 +203,17 @@ public class MainActivity extends BaseActivity implements MainContract.View, Vie
                 .setActionName("toUserActivity")
                 .build()
                 .call();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if ((System.currentTimeMillis() - mLastBackTime) < 1000) {
+            finish();
+            System.exit(0);
+        } else {
+            mLastBackTime = System.currentTimeMillis();
+            showToast(R.string.hint_exit);
+        }
     }
 
     /**

@@ -2,7 +2,17 @@ package com.molmc.ginkgo.basic.constants;
 
 public interface Urls {
 
-    String BASE_URL = "http://www.intoyun.com/";
+    String BASE_URL = "http://ghgylconsole.intoyun.com/";
+
+    /**
+     * 用户登录
+     */
+    String LOGIN = "kingkong/0.01/auth/userLogin";
+
+    /**
+     * 用户登出请求
+     */
+    String USER_LOGOUT = "kingkong/0.01/auth/userLogout";
 
     /**
      * 用户上传文件

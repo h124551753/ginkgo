@@ -5,7 +5,12 @@
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/ginkgo.iml" filepath="$PROJECT_DIR$/ginkgo.iml" />
       <module fileurl="file://$PROJECT_DIR$/ginkgo_basic/ginkgo_basic.iml" filepath="$PROJECT_DIR$/ginkgo_basic/ginkgo_basic.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ginkgo_discovery/ginkgo_discovery.iml" filepath="$PROJECT_DIR$/ginkgo_discovery/ginkgo_discovery.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ginkgo_home/ginkgo_home.iml" filepath="$PROJECT_DIR$/ginkgo_home/ginkgo_home.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ginkgo_message/ginkgo_message.iml" filepath="$PROJECT_DIR$/ginkgo_message/ginkgo_message.iml" />
       <module fileurl="file://$PROJECT_DIR$/ginkgo_scanner/ginkgo_scanner.iml" filepath="$PROJECT_DIR$/ginkgo_scanner/ginkgo_scanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ginkgo_stepcount/ginkgo_stepcount.iml" filepath="$PROJECT_DIR$/ginkgo_stepcount/ginkgo_stepcount.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ginkgo_user/ginkgo_user.iml" filepath="$PROJECT_DIR$/ginkgo_user/ginkgo_user.iml" />
     </modules>
   </component>
 </project>

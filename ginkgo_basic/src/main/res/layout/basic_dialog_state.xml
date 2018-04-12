@@ -17,7 +17,7 @@
         android:paddingTop="@dimen/basic_d20"
         tools:ignore="UselessParent">
 
-        <com.winsion.component.basic.view.LoadingView
+        <com.molmc.ginkgo.basic.views.LoadingView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

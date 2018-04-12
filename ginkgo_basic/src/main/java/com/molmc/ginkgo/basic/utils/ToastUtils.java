@@ -45,6 +45,7 @@ public class ToastUtils {
         if (imgResId == 0) {
             imageView.setVisibility(View.GONE);
         } else {
+            imageView.setVisibility(View.VISIBLE);
             imageView.setImageResource(imgResId);
         }
 

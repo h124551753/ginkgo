@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
     <!-- 白色 -->
     <color name="basic_white1">#FFFFFF</color>
     <color name="basic_white2">#E1DFE0</color>
@@ -10,6 +12,7 @@
     <color name="basic_white7">#C6C7CA</color>
 
     <!-- 灰色 -->
+    <color name="basic_gray">#BDBDBD</color>
     <color name="basic_gray1">#999999</color>
     <color name="basic_gray2">#949494</color>
     <color name="basic_gray3">#7D7D85</color>
@@ -31,6 +34,7 @@
     <color name="basic_black7">#60000000</color>
 
     <!-- 红色 -->
+    <color name="basic_red">#EE2C2C</color>
     <color name="basic_red1">#FF0000</color>
     <color name="basic_red2">#E24D46</color>
     <color name="basic_red3">#5A1B22</color>
@@ -39,9 +43,11 @@
     <!-- 蓝色 -->
     <color name="basic_blue1">#46DBE2</color>
     <color name="basic_blue2">#CC46DBE2</color>
+    <color name="basic_blue3">#00C6FF</color>
     <color name="basic_blue4">#007AFE</color>
 
     <!-- 黄色 -->
+    <color name="basic_yellow">#fd9c06</color>
     <color name="basic_yellow1">#74592C</color>
     <color name="basic_yellow2">#B67801</color>
     <color name="basic_yellow3">#56380F</color>

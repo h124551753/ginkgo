@@ -8,6 +8,7 @@ import com.billy.cc.core.component.CC;
 import com.billy.cc.core.component.CCResult;
 import com.billy.cc.core.component.IComponent;
 import com.molmc.dispatch.activity.main.MainActivity;
+import com.molmc.dispatch.fragment.MineFragment;
 
 /**
  * Created by 10295 on 2018/3/9.
@@ -44,6 +45,9 @@ public class ComponentApp implements IComponent {
                     ((MainActivity) activity).notifyUnreadSysRemindCountChanged(unreadCount);
                 }
                 CC.sendCCResult(cc.getCallId(), CCResult.success());
+                break;
+            case "getMineFragment":
+                CC.sendCCResult(cc.getCallId(), CCResult.success("fragment", new MineFragment()));
                 break;
         }
         return false;

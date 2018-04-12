@@ -115,9 +115,12 @@ public class NetDataSource {
                 .setRetryCount(RETRY_COUNT);
     }
 
+    private static String getBaseUrl(String url){
+        return Urls.BASE_URL + url;
+    }
 
     public static <T> void post(Object tag, String url, HttpParams httpParams, ResponseListener<T> listener) {
-        url = Urls.BASE_URL + url;
+        url = getBaseUrl(url);
         OkGo.<T>post(url)
                 .headers(getHeaderParams())
                 .params(httpParams)
@@ -129,7 +132,7 @@ public class NetDataSource {
     }
 
     public static <T> void post(Object tag, String url, Object data, ResponseListener<T> listener) {
-        url = Urls.BASE_URL + url;
+        url = getBaseUrl(url);
         OkGo.<T>post(url)
                 .headers(getHeaderParams())
                 .upJson(new Gson().toJson(data))
@@ -140,9 +143,73 @@ public class NetDataSource {
                 .subscribe(getObserver(tag, url, listener));
     }
 
+    public static <T> void post(Object tag, String url, HttpParams httpParams, Object data, ResponseListener<T> listener) {
+        url = getBaseUrl(url);
+        OkGo.<T>post(url)
+                .headers(getHeaderParams())
+                .isSpliceUrl(true)
+                .params(httpParams)
+                .upJson(new Gson().toJson(data))
+                .converter(new ObjectConverter<>(listener))
+                .adapt(new ObservableBody<>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(tag, url, listener));
+    }
+
+    public static <T> void put(Object tag, String url, HttpParams httpParams, ResponseListener<T> listener){
+        url = getBaseUrl(url);
+        OkGo.<T>put(url)
+                .headers(getHeaderParams())
+                .params(httpParams)
+                .converter(new ObjectConverter<>(listener))
+                .adapt(new ObservableBody<>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(tag, url, listener));
+    }
+
+    public static <T> void put(Object tag, String url, Object data, ResponseListener<T> listener) {
+        url = getBaseUrl(url);
+        OkGo.<T>post(url)
+                .headers(getHeaderParams())
+                .upJson(new Gson().toJson(data))
+                .converter(new ObjectConverter<>(listener))
+                .adapt(new ObservableBody<>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(tag, url, listener));
+    }
+
+    public static <T> void put(Object tag, String url, HttpParams httpParams, Object data, ResponseListener<T> listener) {
+        url = getBaseUrl(url);
+        OkGo.<T>post(url)
+                .headers(getHeaderParams())
+                .isSpliceUrl(true)
+                .params(httpParams)
+                .upJson(new Gson().toJson(data))
+                .converter(new ObjectConverter<>(listener))
+                .adapt(new ObservableBody<>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(tag, url, listener));
+    }
+
     public static <T> void get(Object tag, String url, HttpParams httpParams, ResponseListener<T> listener) {
-        url = Urls.BASE_URL + url;
+        url = getBaseUrl(url);
         OkGo.<T>get(url)
+                .headers(getHeaderParams())
+                .params(httpParams)
+                .converter(new ObjectConverter<>(listener))
+                .adapt(new ObservableBody<>())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(getObserver(tag, url, listener));
+    }
+
+    public static <T> void delete(Object tag, String url, HttpParams httpParams, ResponseListener<T> listener){
+        url = getBaseUrl(url);
+        OkGo.<T>delete(url)
                 .headers(getHeaderParams())
                 .params(httpParams)
                 .converter(new ObjectConverter<>(listener))
